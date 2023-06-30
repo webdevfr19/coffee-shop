@@ -1,0 +1,113 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<section class="intro" id="intro">
+    <div class="container-lg bg-blur p-3">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-sm-7">
+                <div class="display-5 my-2 p-2 text-center text-sm-start fw-bold"><a href="{% url 'home' %}"><i class="bi bi-arrow-left-circle me-3 text-dark"></i></a>Menu</div>
+                <form>
+                    <div class="mb-4 input-group">
+                        <span class="input-group-text"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control" id="name" placeholder="Search">
+                        <a href="{% url 'cart'%}" class="nav-icon nav-link iconClass">
+                            <i class="bi bi-cart px-4 text-decoration-none text-dark" style="font-size: 25px">
+                            </i>
+                            <!-- <p class="cart-items">{{ cartItems }}</p> -->
+                        </a>
+                    </div>
+                </form>
+                <!-- TAB PAGE -->
+                <nav>
+                    <div class="nav nav-pills justify-content-center align-items-center" id="nav-tab" role="tablist">
+                        <button class="btn active text-dark mx-2" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="#tab" aria-controls="nav-home" aria-selected="true">Drinks</button>
+                        <button class="btn text-dark mx-2" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="#tab" aria-controls="nav-home" aria-selected="false">Food</button>
+                        <button class="btn text-dark mx-2" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="#tab" aria-controls="nav-home" aria-selected="false">Merchandise</button>
+                    </div>    
+                </nav>
+                <div class="tab-content " id="nav-tabContent my-5">
+                    <div class="tab-pane fade show active p-3" id="nav-home" role="tab-panel" aria-labelledby="nav-home-tab">
+                        <p class="display-6 fw-bold">Drinks</p>
+                        <div class="row mt-5">
+                            {% for drink in drink_products %}
+                            <div class="col-md-4 card-hover">
+                                <a href="{% url 'order-drink' drink.id %}"><img src="{{ drink.image.url }}" alt="{{ drink.name }}" class="card-img-top border rounded-circle bg-blur-item"></a>
+                                <div class="lead">{{ drink.name }}</div>
+                                <p class="text-muted">₱{{ drink.price }}</p>
+                                <p>{{ drink.description }}</p>
+                            </div>
+                            {% endfor %}
+                            <!-- <div class="col-md-4 card-hover">
+                                <a href="#"><img src="assets/cappucino-1.png" alt="macchiato" class="card-img-top"></a>
+                                <div class="lead">Cappucino</div>
+                                <p class="text-muted">₱149.00</p>
+                                <p>Indulgent espresso, velvety milk, and a touch of foam create a luxurious cappuccino experience.</p>
+                            </div>  
+                            <div class="col-md-4 card-hover">
+                                <a href="#"><img src="assets/americano-1.png" alt="macchiato" class="card-img-top"></a>
+                                <div class="lead">Americano</div>
+                                <p class="text-muted">₱99.00</p>
+                                <p>Bold espresso shot blended with hot water, creating a rich and smooth coffee experience.</p>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="tab-pane fade p-3" id="nav-profile" role="tab-panel" aria-labelledby="nav-profile-tab">
+                        <p class="display-6 fw-bold">Food</p>
+                        <div class="row mt-5">
+                            {% for food in food_products %}
+                                <div class="col-md-4">
+                                    <a href="{% url 'order-food' food.id %}"><img src="{{ food.image.url }}" alt="macchiato" class="card-img-top"></a>
+                                    <div class="lead">{{ food.name }}</div>
+                                    <p class="text-muted">₱{{ food.price }}</p>
+                                    <p>{{ food.description }}</p>
+                                </div>
+                            {% endfor %}
+                            <!-- <div class="col-md-4">
+                                <a href="#"><img src="assets/glazed-donut.png" alt="macchiato" class="card-img-top"></a>
+                                <div class="lead">Glazed Donut</div>
+                                <p class="text-muted">₱79.00</p>
+                                <p>Irresistibly sweet and sticky delight, our glazed donut is a heavenly treat for your taste buds.</p>
+                            </div>  
+                            <div class="col-md-4">
+                                <a href="#"><img src="assets/egg-sandwich.png" alt="macchiato" class="card-img-top"></a>
+                                <div class="lead">Egg Sandwich</div>
+                                <p class="text-muted">₱89.00</p>
+                                <p>Satisfyingly delicious: Perfectly cooked eggs nestled between toasted bread, creating a mouthwatering breakfast delight.</p>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="tab-pane fade p-3" id="nav-contact" role="tab-panel" aria-labelledby="nav-contant-tab">
+                        <p class="display-6 fw-bold">Merchandise</p>
+                        <div class="row mt-5">
+                            {% for merch in merch_products %}
+                                <div class="col-md-4">
+                                    <a href="{% url 'order-merch' merch.id %}"><img src="{{ merch.image.url }}" alt="{{ merch.name }}" class="card-img-top"></a>
+                                    <div class="lead">{{ merch.name }}</div>
+                                    <p class="text-muted">₱{{ merch.price }}</p>
+                                    <p>{{ merch.description }}</p>
+                                </div>
+                            {% endfor %}
+                            <!-- <div class="col-md-4">
+                                <a href="#"><img src="assets/tumbler-2.png" alt="macchiato" class="card-img-top"></a>
+                                <div class="lead">Sleek Tumbler</div>
+                                <p class="text-muted">₱79.00</p>
+                                <p>Sleek and stylish, the Black Tumbler keeps your beverages hot or cold in ultimate sophistication.</p>
+                            </div>  
+                            <div class="col-md-4">
+                                <a href="#"><img src="assets/tumber-3.png" alt="macchiato" class="card-img-top"></a>
+                                <div class="lead">Peach Tumbler</div>
+                                <p class="text-muted">₱89.00</p>
+                                <p>Vibrant tumbler radiating sunshine vibes, adorned with a peach and yellow palette for stylish sips..</p>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

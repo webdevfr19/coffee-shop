@@ -1,0 +1,191 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+{% block content %}
+<section class="intro" id="intro">
+    <div class="container-lg pb-5">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-5 text-center mt-4 text-md-start mb-5">
+                <h1>
+                    <div class="display-3 fw-bold">Coffee Espresso</div>
+                    <div class="display-5 text-muted">Bad day? Coffee.</div>
+                </h1>
+                <p class="lead my-4 text-muted">Experience the captivating world of coffee. Indulge in rich flavors, expertly crafted blends, and the perfect brew. Elevate your coffee moments with us.</p>
+                <a href="{% url 'menu' %}" class="btn btn-outline-dark btn-lg">View menu</a>
+            </div>
+            <div class="col-md-5 text-center d-none d-md-block">
+                <img class="img-fluid border rounded-circle bg-blur-item bg-gradient p-5" src="{% static 'images/home-coffee.png' %}" alt="cover" style="transform: rotate(-15deg);"">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- PRICING -->
+<section id="menu" class="bg-blur mt-5">
+    <div class="container-lg">
+      <div class="text-center mt-4">
+        <h2>Menu</h2>
+        <p class="lead text-muted">We picked our best coffees, for you.</p>
+      </div>
+      <div class="row my-5 g-0 align-items-center justify-content-center">
+        {% for product in featured_products %}
+        <div class="col-md-4">
+          <div class="card border-0 shadow">
+            <div class="card-body text-center py-4">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="cart-image-top img-fluid">
+                <h4 class="card-title">{{ product.name }}</h4>
+                <p class="display-5 my-4 text-dark fw-bold">{{ product.price }}</p>
+                <p class="card-text mx-5 text-muted d-none d-lg-block">{{ product.description }}</p>
+                <a href="{% url 'menu' %}" class="btn btn-outline-dark btn-lg mt-3">
+                Buy Now
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <!-- <div class="col-9 col-md-4">
+          <div class="card border-dark border-2 shadow">
+            <div class="card-header text-center text-dark">Most Popular</div>
+            <div class="card-body text-center py-5">
+                <img src="assets/cappucino.png" alt="" class="cart-image-top img-fluid">
+                <h4 class="card-title">{{ product.name }}</h4>
+                <p class="display-4 my-4 text-dark fw-bold">{{ product.price }}</p>
+                <p class="card-text mx-5 text-muted d-none d-lg-block">{{ product.description }}</p>
+                <a href="#" class="btn btn-outline-dark btn-lg mt-3">
+                Buy Now
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-8 col-md-4 col-xl-3">
+          <div class="card border-0">
+            <div class="card-body text-center py-4 shadow">
+                <img src="assets/americano.png" alt="" class="cart-image-top img-fluid">
+                <h4 class="card-title">{{ product.name }}</h4>
+                <p class="display-5 my-4 text-dark fw-bold">{{ product.price }}</p>
+                <p class="card-text mx-5 text-muted d-none d-lg-block">{{ product.description }}</p>
+                 <a href="#" class="btn btn-outline-dark btn-lg mt-3">
+                Buy Now
+                </a>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div><!-- end container -->
+</section>
+<!-- REVIEWS -->
+
+<section id="reviews" class="">
+    <div class="container-lg">
+        <div class="text-center">
+            <h2><i class="bi bi-stars"></i> Coffee Reviews</h2>
+            <p class="class">Why our coffee is the best.</p>
+        </div>
+        <div class="row justify-content-center my-5">
+            <div class="col-lg-8 text-center">
+                <div class="list-group ">
+                    <div class="list-group-item py-3">
+                        <div class="pb-2">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <h5 class="mb-1">"Amazing coffee and cozy ambiance! The baristas are friendly and always serve perfection in every cup."</p>
+                        <small>- John Doe</small>
+                    </div>
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item py-3">
+                        <div class="pb-2">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <h5 class="mb-1">'"This coffee shop is my happy place! The latte art is impressive, and the pastries are mouthwatering."</p>
+                        <small>- Emily Smith</small>
+                    </div>
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item py-3">
+                        <div class="pb-2">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </div>
+                        <h5 class="mb-1">"The aroma of freshly brewed coffee hits you as soon as you enter. Great spot to relax and enjoy quality coffee."</p>
+                        <small>Michael Johnson</small>
+                    </div>
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item py-3">
+                        <div class="pb-2">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </div>
+                        <h5 class="mb-1"> "I'm a coffee enthusiast, and this place never disappoints. The beans are carefully sourced, resulting in exceptional flavors."</p>
+                        <small>Sarah Thompson</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- CONTACT FORM -->
+<div id="contact">
+    <div class="container-lg">
+        <div class="row justify-content-center align-items-center my-5">
+            <div class="col-md-6">
+                <div class="text-center">
+                    <h2>Glad you made this far.</h2>
+                    <p class="lead">Questions? Ask us.</p>
+                    <div class="text-center d-none d-lg-block">
+                        <img src="{% static 'images/beans.png' %}" alt="beans" class="img-fluid w-75">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 bg-blur p-5">
+                <form>
+                    <label for="email" class="form-label">Your Email Address: </label>
+                    <div class="mb-4 input-group">
+                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                        <input type="email" class="form-control" id="email" placeholder="e.g example@email.com">
+                    </div>
+
+                    <label for="name" class="form-label">Your Name: </label>
+                    <div class="mb-4 input-group">
+                        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                        <input type="text" class="form-control" id="name" placeholder="Your name">
+                    </div>
+                    
+                    <label for="subject" class="form-label">What is your question about? </label>
+                    <div class="mb-4 input-group">
+                        <span class="input-group-text"><i class="bi bi-question-circle"></i></span>
+                        <select class="form-select" id="subject">
+                            <option value="pricing" selected>Pricing query</option>
+                            <option value="content">Content query</option>
+                            <option value="other">Other query</option>
+                        </select>
+                    </div>
+                    <label for="subject" class="form-label">Tell us about it? </label>
+                    <div class="form-floating mb-4">
+                        <textarea id="query" class="form-control" style="height: 140px">
+                        </textarea>
+                        <label for="query"">Your query...</label>
+                    </div>
+                    <div class="mb-4 text-center">
+                        <button type="submit" class="btn btn-outline-dark">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

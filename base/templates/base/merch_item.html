@@ -1,0 +1,25 @@
+{% extends 'base/index.html' %}
+
+
+{% block content %}
+<div class="container-lg">
+    <div class="row justify-content-center align-items-center">
+        {% for product in product %}
+        <div class="col-md-5 text-center d-none d-md-block">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid border rounded-circle bg-blur-item w-75 p-3">
+        </div>
+        <div class="col-md-5 py-5 px-5">
+            <p class="display-5 text-md-start text-center"><a href="{% url 'menu' %}"><i class="bi bi-arrow-left-circle me-3 text-dark"></i></a>{{ product.name }}</p>
+            <form class="bg-light shadow p-5">
+                <p class="lead"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></p>
+                <p class="text-muted">{{ product.description }}</p>
+                <hr>
+                <div class="form-group">
+                    <button class="btn btn-outline-dark update-cart my-3" data-product="{{ product.id }}" data-action="add">Add to Cart</button>
+                </div>
+            </form>       
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

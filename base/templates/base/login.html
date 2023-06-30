@@ -1,0 +1,36 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+{% block content %}
+<section class="intro mb-5" id="intro">
+    <div class="container-lg">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-5 text-center text-md-start d-none d-md-block">
+                <img class="img-fluid" src="{% static 'images/home-coffee.png' %}" alt="cover">
+            </div>
+            <div class="col-md-5">
+                <form class="shadow p-5" method="POST">
+                    {% csrf_token %}
+                    <div class="display-4"><a href="{% url 'home' %}"><i class="bi bi-arrow-left-circle me-3 text-dark" style="font-size: 40px;"></i></a>Login</div>
+                    <hr>
+                    <label for="name" class="form-label">Name: </label>
+                    <div class="mb-4 input-group">
+                        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                        <input type="text" class="form-control py-2" name="username" id="name" placeholder="Your name">
+                    </div>
+                    <label for="password" class="form-label">Password: </label>
+                    <div class="mb-4 input-group">
+                        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                        <input type="text" class="form-control py-2" name="password" id="password" placeholder="Your name">
+                    </div>
+                    <div class="mb-2">
+                        <button type="submit" class="btn btn-outline-dark">Login</button>
+                        <p class="text-muted mt-2">Dont have an account yet? <a href="{% url 'signup' %}" class="text-dark text-decoration-none fw-bold">Sign up</a></p>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

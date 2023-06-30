@@ -1,0 +1,65 @@
+{% extends 'base/index.html' %}
+
+
+{% block content %}
+<div class="container-lg">
+        <div class="row mt-5 mb-5">
+            <div class="col-md-4">
+                <p class="display-6">Here you can track the progress of your order.</p>
+                <p class="text-muted">While you wait, take a look at the other items available in our <span><a href="menu.html" class="text-decoration-none text-dark fw-bold">menu</a></span>.</p>
+                <!-- <img src="assets/delivery.png" alt="" class="img-fluid w-75"> -->
+                <!-- PROGRESS BAR -->
+            </div>
+            <div class="col-md-8 bg-light p-4 shadow">
+                <p class="lead">Please wait for your order, you will be notified for updates.</p>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated p-2" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 25%; height: 10%;"></div>
+                </div>
+                <div class="row justify-content-center align-items-center text-start mt-3 text-md-center">
+                    <div class="col-md-4">
+                        <p class="lead">Being prepared <i class="bi bi-three-dots"></i></p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="lead">Looking for drivers <i class="bi bi-three-dots"></i></p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="lead">Delivering to your doorstep <i class="bi bi-three-dots"></i></p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row text-center text-md-end mt-3">
+                        <div class="col-md-8 text-start">
+                            <p class="lead fs-3 fw-bold">Order details: </p>
+                            <p class="lead">Order Contents: </p>
+                            <hr>
+                            {% for item in items %}
+                                <div class="m-1 my-3">
+                                    <p class="lead">{{ item.product.name }}</p>
+                                    <small>Big, Extra Hot, Decaf, Milk</small>
+                                    <small>- {{ item.get_total }}</small>
+                                    <small>Quantity - {{ item.quantity }}</small>
+                                </div>
+                            {% endfor %}
+                            <!-- <div class="m-1 my-3">
+                                <p class="lead">2. Cappucino</p>
+                                <small>Big, Extra Hot, Decaf, Milk</small>
+                                <small>- ₱149.00</small>
+                                <small>Quantity - 1</small>
+                            </div> -->
+                            <hr>
+                            <p class="lead fw-bold">Order total: ₱{{ order.get_cart_total }}</p>
+                            <p class="text-muted">Please ready your cash for faster transaction</p>
+                            <div>
+                                <a href="#" class="btn btn-outline-dark my-2">Cancel Order</a>
+                            </div>
+                        </div>
+                    <div class="col-md-4">
+                        <p class="lead">Estimated arrival: <span class="fw-bold">25mins</span></p>
+                        <p class="text-muted">Order number: #{{ order.id }}</p>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

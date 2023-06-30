@@ -1,0 +1,51 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+{% block content %}
+<section class="intro mb-5" id="intro">
+    <div class="container-lg">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-5 text-center text-md-start d-none d-md-block">
+                <img class="img-fluid" src="{% static 'images/home-coffee.png' %}" alt="cover">
+            </div>
+            <div class="col-md-5">
+                <form class="shadow p-5" method="POST">
+                    {% csrf_token %}
+                    <div class="display-4"><a href="{% url 'home' %}"><i class="bi bi-arrow-left-circle me-3 text-dark" style="font-size: 40px;"></i></a>Join us!</div>
+                    <hr>
+                    <label for="email" class="form-label">Email Address: </label>
+                    <div class="mb-4 input-group">
+                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                        <input type="email" class="form-control py-2" name="email" id="email" placeholder="e.g example@email.com">
+                    </div>
+                    <label for="name" class="form-label">Name: </label>
+                    <div class="mb-4 input-group">
+                        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                        <input type="text" class="form-control py-2" name="username" id="name" placeholder="Your name">
+                    </div>
+                    <label for="password" class="form-label">Password: </label>
+                    <div class="mb-4 input-group">
+                        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                        <input type="text" class="form-control py-2" name="password" id="password" placeholder="Enter password">
+                    </div>
+                    <!-- <label for="password" class="form-label">City: </label>
+                    <div class="mb-4 input-group">
+                        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                        <input type="text" class="form-control py-2" name="city" id="password" placeholder="City">
+                    </div>
+                    <label for="password" class="form-label">Shipping address: </label>
+                    <div class="mb-4 input-group">
+                        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                        <input type="text" class="form-control py-2" name="address" id="password" placeholder="Your address">
+                    </div> -->
+                    <div class="mb-2">
+                        <button type="submit" class="btn btn-outline-dark">Login</button>
+                        <p class="text-muted mt-2">Already have an account? <a href="{% url 'customer-info' %}" class="text-dark text-decoration-none fw-bold">Log in</a></p>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

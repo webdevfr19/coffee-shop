@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-f*b^0ekc6)hqk_$nh$x9&!^2s!c42a$t4mrx&@c&ilqp0q*k^x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -119,6 +119,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

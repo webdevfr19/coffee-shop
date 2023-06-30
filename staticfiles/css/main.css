@@ -1,0 +1,55 @@
+html, body {
+    height: 100%;
+}
+
+
+body {
+    background-image: url(/static/images/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.footer {
+    flex-shrink: 0;
+    margin-top: auto;
+}
+
+.container {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.bg-blur {
+    background-color: rgba(248,249,250, 0.7);
+}
+
+.bg-blur-item {
+    background-color: rgba(33,37,41, 0.8);
+}
+
+section {
+    padding: 60px 0;
+}
+.card img {
+    width: 200px;
+}
+
+.cart-items {
+    border: 1px solid;
+    background-color: red;
+}
+
+.chg-quantity{
+	width: 12px;
+	cursor: pointer;
+	display: block;
+	margin-top: 5px;
+	transition:.1s;
+}
+
+.chg-quantity:hover{
+	opacity: .6;
+}

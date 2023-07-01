@@ -35,8 +35,8 @@
                 <h4 class="card-title">{{ product.name }}</h4>
                 <p class="display-5 my-4 text-dark fw-bold">{{ product.price }}</p>
                 <p class="card-text mx-5 text-muted d-none d-lg-block">{{ product.description }}</p>
-                <a href="{% url 'menu' %}" class="btn btn-outline-dark btn-lg mt-3">
-                Buy Now
+                <a href="{% url 'order-drink' product.id%}" class="btn btn-outline-dark btn-lg mt-3">
+                Add to Cart
               </a>
             </div>
           </div>

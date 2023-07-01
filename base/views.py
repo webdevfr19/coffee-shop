@@ -65,25 +65,29 @@ def customerInfo(request):
 
 @login_required(login_url='login')
 def userProfile(request, pk):
-    current_user = request.user
-    try:
-        customer = Customer.objects.get(id=pk)
-    except Customer.DoesNotExist:
-        return redirect('error404')
-    if request.method == 'POST':
-        customer.name = request.POST.get('username')
-        customer.email = request.POST.get('email')
-        customer.address = request.POST.get('address')
-        customer.city = request.POST.get('city')
-        customer.save()
-        return redirect('home')
-    else:
+    if request.user.is_authenticated:
+        try:
+            customer = Customer.objects.get(id=pk)
+        except Customer.DoesNotExist:
+            return redirect('error404')
+        if request.user != customer.user:
+            return redirect('error404')
+        if request.method == 'POST':
+            customer.name = request.POST.get('username')
+            customer.email = request.POST.get('email')
+            customer.address = request.POST.get('address')
+            customer.city = request.POST.get('city')
+            customer.save()
+            return redirect('home')
         context = {
             'customer': customer,
         }
-        return render(request, 'base/user-settings.html', context)
+    else:
+        return render(request, 'login first')
+    return render(request, 'base/user-settings.html', context)
 
 def menu(request):
+    page = 1
     drink_products = Product.objects.filter(category=1)
     food_products = Product.objects.filter(category=4) # i dont know what happened with database but its working lol
     merch_products = Product.objects.filter(category=5)
@@ -91,6 +95,7 @@ def menu(request):
         'food_products': food_products,
         'drink_products': drink_products,
         'merch_products': merch_products,
+        'page': page,
     }
     return render(request, 'base/menu.html', context)
 
@@ -136,6 +141,7 @@ def addCart(request, pk):
 
 @login_required(login_url='login')
 def cart(request):
+    page = 1
     if request.user.is_authenticated: 
         customer = request.user.customer
         order, created = Cart.objects.get_or_create(customer=customer, complete=False)
@@ -147,11 +153,13 @@ def cart(request):
     context = {
         'items': items,
         'order': order,
+        'page': page,
     }
     return render(request, 'base/cart.html', context)
 
 @login_required(login_url='login')
 def delivery(request):
+    page = 1
     if request.user.is_authenticated: 
         customer = request.user.customer
         order, created = Cart.objects.get_or_create(customer=customer, complete=False)
@@ -163,6 +171,7 @@ def delivery(request):
     context = {
         'items': items,
         'order': order,
+        'page': page,
     }
     return render(request, 'base/delivery.html', context)
 

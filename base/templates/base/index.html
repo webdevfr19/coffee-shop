@@ -55,9 +55,9 @@
                     <li class="nav-item">
                         <a href="{% url 'menu' %}" class="nav-link">Menu</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="#" class="nav-link">Contact us</a>
-                    </li>
+                    </li> -->
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <div class="text-muted nav-link">Hello, <a href="{% url 'user-settings' request.user.id %}" class="text-decoration-none text-dark"><span class="fw-bold">{{ request.user }}</span></a></div>
@@ -68,6 +68,15 @@
                     {% else %}
                     <li class="nav-item ms-2 d-none d-md-inline">
                         <a href="{% url 'login' %}" class="btn btn-outline-dark">Login</a>
+                    </li>
+                    {% endif %}
+                    {% if page != 1 %}
+                    <li class="nav-item">
+                        <a href="{% url 'cart'%}" class="iconClass px-3">
+                            <i class="bi bi-cart text-decoration-none text-dark" style="font-size: 25px">
+                            </i>
+                            <!-- <p class="cart-items">{{ cartItems }}</p> -->
+                        </a>
                     </li>
                     {% endif %}
                 </ul>
@@ -86,6 +95,7 @@
                     <a href="#navbar" class="display-5 fw-bold text-muted text-decoration-none"><p >Coffee Espresso'</p></a>
                     <h5>All rights reserved</h5>
                     <p class="lead">Bringing you happiness with a sip of our coffee.</p>
+                    <p class="text-muted">@Kevin Kurt Datiles</p>
                 </div>
                 <div class="d-flex justify-content-center">
                     <div class="p-2">

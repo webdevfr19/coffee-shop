@@ -1,0 +1,18 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="container text-center">
+    <div>
+        <img src="{% static 'images/404.png' %}" alt="" class="img-fluid">
+    </div>
+    <div>
+        <p class="display-5">Whoops!</p>
+        <p class="lead">You are accessing a broken link.</p>
+    </div>
+</div>
+
+
+{% endblock %}

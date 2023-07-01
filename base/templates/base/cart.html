@@ -47,6 +47,7 @@
                                         <p class="lead">Total: ₱{{ order.get_cart_total }}</p>
                                     </div>
                                 </div>
+                                {% if order.get_cart_items > 0 %}
                                 <div class="text-center">
                                     <a href="{% url 'delivery' %}">
                                         <button class="btn btn-outline-dark mt-3">Proceed to Checkout</button>
@@ -58,11 +59,11 @@
                                         <div class="list-group-item py-3 justify-content-center">
                                             <p class="lead">Payment Options</p>
                                             <form action="" id="form">
-
                                             </form>
                                         </div>
                                     </div>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

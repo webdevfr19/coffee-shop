@@ -1,12 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 import json
 from .models import Product, Cart, OrderItem, Customer
 # from .forms import ProductForm
 # Create your views here.
+
+def Error404(request):
+    return render(request, 'base/404.html')
 
 def home(request):
     featured_products = Product.objects.all()[:3]
@@ -30,6 +34,10 @@ def Userlogin(request):
 
     }
     return render(request, 'base/login.html', context)
+
+# def UserLogout(request):
+#     logout(request)
+#     return redirect('home')
 
 def Usersignup(request):
     if request.method == 'POST':
@@ -55,9 +63,13 @@ def customerInfo(request):
     else:
         return render(request, 'base/customer-info.html')
 
+@login_required(login_url='login')
 def userProfile(request, pk):
     current_user = request.user
-    customer = Customer.objects.get(id=pk)
+    try:
+        customer = Customer.objects.get(id=pk)
+    except Customer.DoesNotExist:
+        return redirect('error404')
     if request.method == 'POST':
         customer.name = request.POST.get('username')
         customer.email = request.POST.get('email')
@@ -72,47 +84,57 @@ def userProfile(request, pk):
         return render(request, 'base/user-settings.html', context)
 
 def menu(request):
-    customer = request.user.customer
-    order = Cart.objects.get(customer=customer)
     drink_products = Product.objects.filter(category=1)
     food_products = Product.objects.filter(category=4) # i dont know what happened with database but its working lol
     merch_products = Product.objects.filter(category=5)
-    cartItems = order.get_cart_items
     context = {
         'food_products': food_products,
         'drink_products': drink_products,
         'merch_products': merch_products,
-        'cartItems': cartItems,
     }
     return render(request, 'base/menu.html', context)
 
+@login_required(login_url='login')
 def orderDrink(request, pk):
-    product = Product.objects.filter(id=pk)
+    try:
+        product = Product.objects.get(id=pk)
+    except Product.DoesNotExist:
+        return redirect('error404')
     context = {
         'product': product,
     }
     return render(request, 'base/drink_item.html', context)
 
+@login_required(login_url='login')
 def orderFood(request, pk):
-    product = Product.objects.filter(id=pk)
+    try:
+        product = Product.objects.get(id=pk)
+    except Product.DoesNotExist:
+        return redirect('error404')
     context = {
         'product': product,
     }
     return render(request, 'base/food_item.html', context)
 
+@login_required(login_url='login')
 def orderMerch(request, pk):
-    product = Product.objects.filter(id=pk)
+    try:
+        product = Product.objects.get(id=pk)
+    except Product.DoesNotExist:
+        return redirect('error404')
     context = {
         'product': product,
     }
     return render(request, 'base/merch_item.html', context)
 
+@login_required(login_url='login')
 def addCart(request, pk):
     product = get_object_or_404(Product, id=pk)
     cart = Cart.objects.get_or_create(user=request.user, products=product, total_price=product.price)
     cart.save()
     return redirect('menu')
 
+@login_required(login_url='login')
 def cart(request):
     if request.user.is_authenticated: 
         customer = request.user.customer
@@ -128,6 +150,7 @@ def cart(request):
     }
     return render(request, 'base/cart.html', context)
 
+@login_required(login_url='login')
 def delivery(request):
     if request.user.is_authenticated: 
         customer = request.user.customer
@@ -143,6 +166,7 @@ def delivery(request):
     }
     return render(request, 'base/delivery.html', context)
 
+@login_required(login_url='login')
 def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']
